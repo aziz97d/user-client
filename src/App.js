@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Navbar from "./components/Navbar/Navbar";
+import * as ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
+import Users from "./components/Pages/Users/Users";
+import Layout from "./components/Layout/Layout";
+import Home from "./components/Pages/Home/Home";
+
+import React from "react";
+import UserFile from "./components/Pages/UserFile/UserFile";
+import FileViewer from "./components/Pages/FileViewer/FileViewer";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="users" element={<Users />} />
+          <Route path="UserFile">
+            <Route path=":userId" element={<UserFile />} />
+          </Route>
+          <Route path="fileViewer">
+            <Route path=":fileName" element={<FileViewer />} />
+          </Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
